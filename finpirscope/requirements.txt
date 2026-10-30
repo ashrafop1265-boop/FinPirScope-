@@ -1,0 +1,8 @@
+flask>=3.0
+pandas>=2.0
+numpy>=1.24
+scikit-learn==1.8.0
+joblib>=1.3
+# Optional: if installed, XGBoost is used for the XGBoost model in Question 1
+# (otherwise scikit-learn HistGradientBoosting is used as a substitute)
+# xgboost>=2.0

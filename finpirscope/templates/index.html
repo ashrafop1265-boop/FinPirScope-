@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FinPirScope · Movie Piracy Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">◉</span> FinPirScope <small>Movie piracy prediction</small></div>
+  <nav>
+    <button class="tab active" data-tab="predict">Predict</button>
+    <button class="tab" data-tab="results">Model results</button>
+    <button class="tab" data-tab="insights">Data insights</button>
+    <button class="tab" data-tab="about">About</button>
+  </nav>
+</header>
+
+<main>
+<!-- ============ PREDICT ============ -->
+<section id="tab-predict" class="panel active">
+  <div class="grid two">
+    <div class="card">
+      <h2>Describe a movie</h2>
+      <p class="muted">Search a movie from the dataset to auto-fill, or enter the details yourself.</p>
+      <div class="search">
+        <input id="search" type="text" placeholder="Search title… e.g. Inception" autocomplete="off">
+        <div id="suggest" class="suggest"></div>
+      </div>
+
+      <form id="form" autocomplete="off">
+        <div class="fields">
+          <label>IMDb rating<input name="imdb_rating" type="number" step="0.1" min="1" max="10" value="6.5"></label>
+          <label>Runtime (min)<input name="runtime" type="number" min="20" max="400" value="110"></label>
+          <label>Release year<input name="release_year" type="number" min="1980" max="2030" value="2022"></label>
+          <label>Release month
+            <select name="release_month"></select></label>
+          <label>Industry<select name="industry"></select></label>
+          <label>Language<select name="language"></select></label>
+          <label>Age rating<select name="age_rating"></select></label>
+          <label>Genre<select name="genre"></select></label>
+          <label class="wide">Days the movie has been on the piracy site
+            <input name="days_since_posted" type="number" min="0" value="200">
+            <span class="hint">Used by Question 1 only (older uploads have had more time to collect downloads).</span></label>
+        </div>
+        <details>
+          <summary>Optional TMDB details (popularity, votes, budget)</summary>
+          <div class="fields">
+            <label>TMDB popularity<input name="tmdb_popularity" type="number" step="0.1" min="0" placeholder="e.g. 45"></label>
+            <label>TMDB vote count<input name="tmdb_vote_count" type="number" min="0" placeholder="e.g. 3200"></label>
+            <label>TMDB vote average<input name="tmdb_vote_average" type="number" step="0.1" min="0" max="10" placeholder="e.g. 7.1"></label>
+            <label>Budget (USD)<input name="tmdb_budget" type="number" min="0" placeholder="e.g. 60000000"></label>
+          </div>
+          <p class="hint">Leave blank if unknown, the models use typical (median) values.</p>
+        </details>
+        <button class="primary" type="submit">Predict piracy</button>
+        <div id="error" class="error"></div>
+      </form>
+    </div>
+
+    <div id="output" class="stack">
+      <div class="card placeholder">
+        <h2>Prediction</h2>
+        <p class="muted">Fill the form and press <b>Predict piracy</b>. Two questions are answered:</p>
+        <ol class="muted">
+          <li><b>Heavy or light?</b> Will it land in the top or bottom third of downloads?</li>
+          <li><b>Fast or slow?</b> Will it be uploaded sooner or later than the median after release?</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTS ============ -->
+<section id="tab-results" class="panel">
+  <div class="card"><h2>Question 1 · Will a movie be pirated heavily?</h2>
+    <p class="muted" id="q1-note"></p>
+    <div class="grid two"><div id="q1-bars"></div><div id="q1-table"></div></div>
+  </div>
+  <div class="grid two">
+    <div class="card"><h3>Top features (Q1)</h3><div id="q1-imp"></div></div>
+    <div class="card"><h3>Confusion matrices (Q1)</h3><div id="q1-cm" class="cms"></div></div>
+  </div>
+  <div class="grid two">
+    <div class="card"><h3>KNN: cross-validation accuracy vs K</h3><div id="knn-curve"></div></div>
+  </div>
+
+  <div class="card"><h2>Question 2 · Will a movie be pirated quickly?</h2>
+    <p class="muted" id="q2-note"></p>
+    <div class="grid two"><div id="q2-bars"></div><div id="q2-table"></div></div>
+  </div>
+  <div class="grid two">
+    <div class="card"><h3>Top features (Q2)</h3><div id="q2-imp"></div></div>
+    <div class="card"><h3>Confusion matrices (Q2)</h3><div id="q2-cm" class="cms"></div></div>
+  </div>
+</section>
+
+<!-- ============ INSIGHTS ============ -->
+<section id="tab-insights" class="panel">
+  <div class="stats" id="stats"></div>
+  <div class="grid two">
+    <div class="card"><h3>Downloads are heavily skewed</h3><p class="muted">Movies by log₁₀(downloads)</p><div id="eda-dl"></div></div>
+    <div class="card"><h3>Days from release to piracy upload</h3><p class="muted">Movies uploaded within 1 year of release</p><div id="eda-leak"></div></div>
+  </div>
+  <div class="grid two">
+    <div class="card"><h3>Median downloads by industry</h3><div id="eda-ind"></div></div>
+    <div class="card"><h3>Median leak days by industry <small>(lower = faster)</small></h3><div id="eda-indleak"></div></div>
+  </div>
+  <div class="grid two">
+    <div class="card"><h3>Median downloads by release year</h3><div id="eda-year"></div></div>
+    <div class="card"><h3>Spearman correlation</h3><div id="eda-corr"></div></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="tab-about" class="panel">
+  <div class="card prose">
+    <h2>About this project</h2>
+    <p>FinPirScope predicts how much, and how quickly, a movie gets pirated, by combining a pirated-movie listing
+    dataset with TMDB movie metadata.</p>
+    <h3>Pipeline</h3>
+    <ol>
+      <li><b>Clean</b> the pirated dataset (downloads/views to numbers, run-time to minutes, dates, rare categories to “Other”).</li>
+      <li><b>Merge</b> with TMDB data by cleaned title + release year (left join).</li>
+      <li><b>Question 1</b>: top-third vs bottom-third by downloads (middle third dropped). Models: Decision Tree, XGBoost, KNN.</li>
+      <li><b>Question 2</b>: uploaded faster vs slower than the median number of days after release (only movies uploaded within a year). Models: Decision Tree, Random Forest, KNN.</li>
+    </ol>
+    <h3>Things to keep in mind</h3>
+    <ul>
+      <li>The two classes are balanced, so random guessing ≈ 50%.</li>
+      <li>Q1 relies a lot on “days online”: older uploads simply had more time to be downloaded.</li>
+      <li>Only a minority of titles matched TMDB, so TMDB fields are optional in the form.</li>
+      <li>This is an academic prediction exercise on a historical dataset, not a tool for finding or accessing pirated content.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

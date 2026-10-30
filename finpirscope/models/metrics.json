@@ -1,0 +1,787 @@
+{
+  "dataset": {
+    "rows": 17085,
+    "tmdb_matched_pct": 9.8,
+    "q1_rows": 11390,
+    "q2_rows": 12114,
+    "tmdb_v11_used": false,
+    "date_min": "2009-07-21",
+    "date_max": "2023-02-20"
+  },
+  "q1": {
+    "results": [
+      {
+        "model": "Decision Tree",
+        "accuracy": 0.8793,
+        "f1": 0.8793,
+        "confusion": [
+          [
+            1013,
+            126
+          ],
+          [
+            149,
+            990
+          ]
+        ],
+        "params": {
+          "max_depth": 8,
+          "min_samples_leaf": 10
+        }
+      },
+      {
+        "model": "KNN",
+        "accuracy": 0.8793,
+        "f1": 0.8793,
+        "confusion": [
+          [
+            1011,
+            128
+          ],
+          [
+            147,
+            992
+          ]
+        ],
+        "params": {
+          "k": 7
+        },
+        "k_curve": {
+          "3": 0.8725,
+          "5": 0.8818,
+          "7": 0.8839,
+          "11": 0.8822,
+          "15": 0.8811,
+          "21": 0.8784,
+          "31": 0.8731
+        }
+      },
+      {
+        "model": "ANN",
+        "accuracy": 0.8955,
+        "f1": 0.8955,
+        "confusion": [
+          [
+            1030,
+            109
+          ],
+          [
+            129,
+            1010
+          ]
+        ],
+        "loss_curve": [
+          0.3978,
+          0.2702,
+          0.2529,
+          0.243,
+          0.2355,
+          0.2295,
+          0.2261,
+          0.2219,
+          0.2169,
+          0.216,
+          0.2126,
+          0.2119,
+          0.2086,
+          0.2056,
+          0.2074,
+          0.2056,
+          0.2046,
+          0.2021,
+          0.2012,
+          0.1995,
+          0.1964,
+          0.1993,
+          0.1959,
+          0.1944,
+          0.1942,
+          0.1974,
+          0.193,
+          0.1896,
+          0.1904,
+          0.1889,
+          0.1892,
+          0.1877,
+          0.186,
+          0.1862,
+          0.186,
+          0.1846,
+          0.1841,
+          0.183,
+          0.1838
+        ],
+        "val_acc_curve": [
+          0.8749,
+          0.8854,
+          0.8848,
+          0.8903,
+          0.8936,
+          0.8897,
+          0.8941,
+          0.8963,
+          0.8936,
+          0.8936,
+          0.8941,
+          0.8925,
+          0.8969,
+          0.9035,
+          0.8969,
+          0.8936,
+          0.8969,
+          0.9013,
+          0.898,
+          0.9007,
+          0.8969,
+          0.8991,
+          0.8996,
+          0.9007,
+          0.904,
+          0.8974,
+          0.9013,
+          0.9057,
+          0.9029,
+          0.9024,
+          0.9013,
+          0.9018,
+          0.9018,
+          0.9002,
+          0.904,
+          0.8991,
+          0.9007,
+          0.8925,
+          0.9051
+        ]
+      },
+      {
+        "model": "SVM",
+        "accuracy": 0.8863,
+        "f1": 0.8863,
+        "confusion": [
+          [
+            1021,
+            118
+          ],
+          [
+            141,
+            998
+          ]
+        ],
+        "params": {
+          "C": 10,
+          "gamma": "scale"
+        }
+      },
+      {
+        "model": "Gradient Boosting",
+        "accuracy": 0.899,
+        "f1": 0.899,
+        "confusion": [
+          [
+            1032,
+            107
+          ],
+          [
+            123,
+            1016
+          ]
+        ],
+        "params": {
+          "learning_rate": 0.03,
+          "max_depth": 8,
+          "max_iter": 500
+        },
+        "engine": "sklearn HistGradientBoosting"
+      }
+    ],
+    "importance": [
+      {
+        "feature": "days_since_posted",
+        "importance": 0.1331
+      },
+      {
+        "feature": "industry_Hollywood / English",
+        "importance": 0.0896
+      },
+      {
+        "feature": "age_rating_Unknown",
+        "importance": 0.0447
+      },
+      {
+        "feature": "runtime",
+        "importance": 0.0244
+      },
+      {
+        "feature": "industry_Bollywood / Indian",
+        "importance": 0.0189
+      },
+      {
+        "feature": "imdb_rating",
+        "importance": 0.0167
+      },
+      {
+        "feature": "industry_Pakistani",
+        "importance": 0.0118
+      },
+      {
+        "feature": "release_year",
+        "importance": 0.0096
+      },
+      {
+        "feature": "tmdb_popularity",
+        "importance": 0.0062
+      },
+      {
+        "feature": "tmdb_vote_average",
+        "importance": 0.0058
+      },
+      {
+        "feature": "tmdb_budget",
+        "importance": 0.0047
+      },
+      {
+        "feature": "age_rating_PG",
+        "importance": 0.0042
+      },
+      {
+        "feature": "industry_Anime / Kids",
+        "importance": 0.004
+      },
+      {
+        "feature": "tmdb_vote_count",
+        "importance": 0.0033
+      },
+      {
+        "feature": "release_month",
+        "importance": 0.0031
+      }
+    ],
+    "tiers": {
+      "0": {
+        "count": 5695,
+        "min": 0,
+        "max": 1901
+      },
+      "1": {
+        "count": 5695,
+        "min": 1902,
+        "max": 7972
+      },
+      "2": {
+        "count": 5695,
+        "min": 7972,
+        "max": 391272
+      }
+    },
+    "labels": [
+      "Low",
+      "High"
+    ]
+  },
+  "q2": {
+    "results": [
+      {
+        "model": "Decision Tree",
+        "accuracy": 0.6104,
+        "f1": 0.5946,
+        "confusion": [
+          [
+            979,
+            263
+          ],
+          [
+            681,
+            500
+          ]
+        ],
+        "params": {
+          "max_depth": 8,
+          "min_samples_leaf": 1
+        }
+      },
+      {
+        "model": "KNN",
+        "accuracy": 0.624,
+        "f1": 0.6194,
+        "confusion": [
+          [
+            890,
+            352
+          ],
+          [
+            559,
+            622
+          ]
+        ],
+        "params": {
+          "k": 31
+        },
+        "k_curve": {
+          "3": 0.5933,
+          "5": 0.6038,
+          "7": 0.6054,
+          "11": 0.6089,
+          "15": 0.6127,
+          "21": 0.6179,
+          "31": 0.6258
+        }
+      },
+      {
+        "model": "Random Forest",
+        "accuracy": 0.6265,
+        "f1": 0.623,
+        "confusion": [
+          [
+            875,
+            367
+          ],
+          [
+            538,
+            643
+          ]
+        ],
+        "params": {
+          "max_depth": null,
+          "min_samples_leaf": 5,
+          "n_estimators": 200
+        }
+      }
+    ],
+    "importance": [
+      {
+        "feature": "runtime",
+        "importance": 0.171
+      },
+      {
+        "feature": "imdb_rating",
+        "importance": 0.142
+      },
+      {
+        "feature": "industry_Bollywood / Indian",
+        "importance": 0.0893
+      },
+      {
+        "feature": "release_month",
+        "importance": 0.084
+      },
+      {
+        "feature": "age_rating_Unknown",
+        "importance": 0.0801
+      },
+      {
+        "feature": "language_Hindi",
+        "importance": 0.063
+      },
+      {
+        "feature": "industry_Hollywood / English",
+        "importance": 0.0407
+      },
+      {
+        "feature": "age_rating_R",
+        "importance": 0.0301
+      },
+      {
+        "feature": "industry_Stage shows",
+        "importance": 0.0251
+      },
+      {
+        "feature": "industry_Wrestling",
+        "importance": 0.0244
+      },
+      {
+        "feature": "industry_Tollywood",
+        "importance": 0.0213
+      },
+      {
+        "feature": "tmdb_vote_count",
+        "importance": 0.0213
+      },
+      {
+        "feature": "tmdb_budget",
+        "importance": 0.0187
+      },
+      {
+        "feature": "language_English",
+        "importance": 0.0187
+      },
+      {
+        "feature": "tmdb_popularity",
+        "importance": 0.0186
+      }
+    ],
+    "median_leak": 7.0,
+    "removed_before_release": 919,
+    "removed_over_year": 1082,
+    "labels": [
+      "Slow",
+      "Fast"
+    ]
+  },
+  "eda": {
+    "downloads_log_hist": {
+      "counts": [
+        66,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        5,
+        2,
+        13,
+        57,
+        172,
+        421,
+        657,
+        858,
+        1089,
+        1437,
+        1629,
+        1838,
+        1697,
+        1559,
+        1413,
+        1276,
+        1071,
+        736,
+        500,
+        308,
+        196,
+        66,
+        16
+      ],
+      "edges": [
+        0.0,
+        0.19,
+        0.37,
+        0.56,
+        0.75,
+        0.93,
+        1.12,
+        1.3,
+        1.49,
+        1.68,
+        1.86,
+        2.05,
+        2.24,
+        2.42,
+        2.61,
+        2.8,
+        2.98,
+        3.17,
+        3.36,
+        3.54,
+        3.73,
+        3.91,
+        4.1,
+        4.29,
+        4.47,
+        4.66,
+        4.85,
+        5.03,
+        5.22,
+        5.41,
+        5.59
+      ]
+    },
+    "leak_hist": {
+      "counts": [
+        6816,
+        863,
+        401,
+        291,
+        250,
+        213,
+        233,
+        256,
+        232,
+        198,
+        187,
+        189,
+        209,
+        164,
+        129,
+        119,
+        92,
+        95,
+        76,
+        84,
+        80,
+        94,
+        84,
+        69,
+        72,
+        53,
+        66,
+        63,
+        64,
+        59,
+        54,
+        52,
+        44,
+        48,
+        58,
+        57
+      ],
+      "edges": [
+        0.0,
+        10.14,
+        20.28,
+        30.42,
+        40.56,
+        50.69,
+        60.83,
+        70.97,
+        81.11,
+        91.25,
+        101.39,
+        111.53,
+        121.67,
+        131.81,
+        141.94,
+        152.08,
+        162.22,
+        172.36,
+        182.5,
+        192.64,
+        202.78,
+        212.92,
+        223.06,
+        233.19,
+        243.33,
+        253.47,
+        263.61,
+        273.75,
+        283.89,
+        294.03,
+        304.17,
+        314.31,
+        324.44,
+        334.58,
+        344.72,
+        354.86,
+        365.0
+      ]
+    },
+    "median_downloads_by_industry": {
+      "labels": [
+        "Pakistani",
+        "Hollywood / English",
+        "Wrestling",
+        "Anime / Kids",
+        "Punjabi",
+        "Stage shows",
+        "Tollywood",
+        "Bollywood / Indian",
+        "Other"
+      ],
+      "values": [
+        0.0,
+        2385.0,
+        2974.0,
+        5162.0,
+        7427.0,
+        7686.0,
+        17130.0,
+        17380.0,
+        22104.0
+      ]
+    },
+    "median_leak_by_industry": {
+      "labels": [
+        "Bollywood / Indian",
+        "Stage shows",
+        "Wrestling",
+        "Anime / Kids",
+        "Hollywood / English",
+        "Punjabi",
+        "Other",
+        "Tollywood",
+        "Pakistani"
+      ],
+      "values": [
+        1.0,
+        1.0,
+        1.0,
+        6.0,
+        8.0,
+        24.0,
+        83.0,
+        105.0,
+        229.0
+      ]
+    },
+    "median_downloads_by_year": {
+      "labels": [
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "values": [
+        20134.0,
+        16046.0,
+        19054.0,
+        20135.0,
+        19718.0,
+        16101.0,
+        18907.0,
+        18872.0,
+        11602.0,
+        9095.0,
+        10403.0,
+        7584.0,
+        6483.0,
+        7145.0,
+        6585.0,
+        4960.0,
+        3554.0,
+        3090.0,
+        2126.0,
+        1782.0,
+        1078.0,
+        840.0,
+        1248.0,
+        1295.0
+      ]
+    },
+    "correlation": {
+      "labels": [
+        "downloads",
+        "views",
+        "imdb_rating",
+        "runtime",
+        "days_since_posted",
+        "release_year"
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.93,
+          0.15,
+          0.41,
+          0.48,
+          -0.41
+        ],
+        [
+          0.93,
+          1.0,
+          0.14,
+          0.4,
+          0.3,
+          -0.27
+        ],
+        [
+          0.15,
+          0.14,
+          1.0,
+          0.37,
+          0.1,
+          -0.08
+        ],
+        [
+          0.41,
+          0.4,
+          0.37,
+          1.0,
+          0.11,
+          -0.12
+        ],
+        [
+          0.48,
+          0.3,
+          0.1,
+          0.11,
+          1.0,
+          -0.87
+        ],
+        [
+          -0.41,
+          -0.27,
+          -0.08,
+          -0.12,
+          -0.87,
+          1.0
+        ]
+      ]
+    }
+  },
+  "options": {
+    "industry": [
+      "Anime / Kids",
+      "Bollywood / Indian",
+      "Hollywood / English",
+      "Other",
+      "Pakistani",
+      "Punjabi",
+      "Stage shows",
+      "Tollywood",
+      "Wrestling"
+    ],
+    "language": [
+      "English",
+      "French",
+      "Hindi",
+      "Japanese",
+      "Kannada",
+      "Malayalam",
+      "Other",
+      "Punjabi",
+      "Spanish",
+      "Tamil",
+      "Telugu",
+      "Unknown",
+      "Urdu"
+    ],
+    "age_rating": [
+      "G",
+      "Not Rated",
+      "Other",
+      "PG",
+      "PG-13",
+      "R",
+      "TV-14",
+      "TV-G",
+      "TV-MA",
+      "TV-PG",
+      "Unknown",
+      "Unrated"
+    ],
+    "genre": [
+      "Action",
+      "Adventure",
+      "Animation",
+      "Comedy",
+      "Crime",
+      "Drama",
+      "Fantasy",
+      "Horror",
+      "Other",
+      "Romance",
+      "SciFi",
+      "Thriller",
+      "Unknown"
+    ]
+  }
+}
